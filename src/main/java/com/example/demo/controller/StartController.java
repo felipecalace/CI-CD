@@ -10,6 +10,6 @@ public class StartController {
 
     @GetMapping("/status")
     public String status() {
-        return "Status: API Online";
+        return "Status: API Atualizada com watchtower!";
     }
-}
+}   
