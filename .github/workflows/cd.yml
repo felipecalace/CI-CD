@@ -19,10 +19,15 @@ jobs:
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.EC2_KEY }}
           script: |
+
+            docker rm -f spring-api || true
+
             docker pull ${{ secrets.DOCKER_USERNAME }}/spring-api:latest
-            docker stop spring-api || true
-            docker rm spring-api || true
+
             docker run -d \
               --name spring-api \
+              --restart always \
               -p 8080:8080 \
               ${{ secrets.DOCKER_USERNAME }}/spring-api:latest
+
+            echo "Deploy finalizado com sucesso!"
